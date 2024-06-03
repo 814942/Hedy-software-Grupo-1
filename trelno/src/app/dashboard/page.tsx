@@ -1,22 +1,21 @@
-import { createClient } from "@/utils/supabase/server";
-import React from "react";
+import AddBoardModal from "@/components/dashboard/AddBoardForm";
+import Boards from "@/components/dashboard/Boards";
+import { deleteBoard, getBoards } from "./actions";
 
-const page = async () => {
-  const supabase = createClient();
-  const { data: boards } = await supabase.from("board").select("*");
+const Page = async () => {
+  const userId = 1;
 
-  console.log(boards);
+  const boards = await getBoards();
+
+  console.log("Los boards son: ", boards);
+
+  // deleteBoard(4);
 
   return (
     <div>
-      <h1>Boards</h1>
-      <ul>
-        {boards?.map((board: any) => (
-          <li key={board.id}>{board.name}</li>
-        ))}
-      </ul>
+      <h1>Dashboard - List Boards</h1>
     </div>
   );
 };
 
-export default page;
+export default Page;
