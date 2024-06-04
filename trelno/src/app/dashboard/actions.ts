@@ -1,6 +1,7 @@
 'use server'
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/dist/server/api-utils";
 
 export async function getBoards() {
   try {
@@ -27,7 +28,6 @@ export async function addBoard(newBoard: any) {
     console.error(error);
     return false;
   } else {
-    console.log("Board added");
     revalidatePath("/dashboard");
   }
 }
