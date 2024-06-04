@@ -1,9 +1,15 @@
-import React, { FC } from 'react';
+import { getContainers, getTickets } from "./actions";
 
-export const Board: FC = () => {
+const BoardPage = async ({ params }) => {
+  const boardId = params.boardId;
+  const containers = await getContainers(boardId);
+  const tickets = await getTickets(1);
+
   return (
     <div>
-      {/* Board content */}
+      <p>Board Id: {boardId}</p>
     </div>
   );
 };
+
+export default BoardPage;
