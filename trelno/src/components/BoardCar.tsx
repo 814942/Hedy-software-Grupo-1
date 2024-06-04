@@ -1,53 +1,42 @@
-// components/BoardCard.tsx
+'use client'
 import Link from 'next/link';
 import { FaTrash } from 'react-icons/fa';
 
 interface BoardCardProps {
   id: string;
   name: string;
-  image: string;
   onClick?: () => void;
-  onDelete?: () => void; // Nueva propiedad para manejar la eliminación
+  onDelete?: () => void; 
 }
 
-const BoardCard: React.FC<BoardCardProps> = ({ id, name, image, onClick, onDelete }) => {
+const BoardCard: React.FC<BoardCardProps> = ({ id, name, onClick, onDelete }) => {
   const handleDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault(); // Evitar que se propague el evento al contenedor padre
-     // Prevenir la redirección por defecto
+    e.preventDefault();
     if (onDelete) {
-      onDelete(); // Llamar a la función de eliminación si está definida
+      onDelete();
     }
   };
+  function deleteboard(){
+    console.log('elinminar')
+  }
 
-  return onClick ? (
-    <div onClick={onClick}>
-      <div 
-        className="relative bg-cover bg-center h-48 rounded-lg shadow-md p-4 cursor-pointer hover:bg-opacity-75 flex items-end" 
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        {/* Contenido del card */}
-        <div className="bg-white bg-opacity-75 w-full text-center py-2">
+  return (
+    <div className="bg-gray-400 rounded-lg shadow-md cursor-pointer hover:bg-opacity-75 relative">
+      {!onClick && (
+        <div className="absolute top-2 right-2" onClick={deleteboard}>
+          <FaTrash className="text-white cursor-pointer bg-gray-400" />
+        </div>
+      )}
+      <div className="h-48 bg-gray-400 rounded-lg p-4 flex flex-col justify-end">
+        <div className="text-center">
           <h2 className="text-xl font-semibold">{name}</h2>
         </div>
       </div>
-    </div>
-  ) : (
-    <div>
-      <Link href={`/boards/${id}`} passHref>
-        <div 
-          className="relative bg-cover bg-center h-48 rounded-lg shadow-md p-4 cursor-pointer hover:bg-opacity-75 flex items-end" 
-          style={{ backgroundImage: `url(${image})` }}
-        >
-          {/* Ícono de basura */}
-          <div className="absolute top-2 right-2 cursor-pointer" onClick={handleDelete}>
-            <FaTrash color='white' />
-          </div>
-          {/* Contenido del card */}
-          <div className="bg-white bg-opacity-75 w-full text-center py-2">
-            <h2 className="text-xl font-semibold">{name}</h2>
-          </div>
-        </div>
-      </Link>
+      {onClick && (
+        <Link href={`/boards/${id}`} passHref>
+          <div className="absolute inset-0 z-10" />
+        </Link>
+      )}
     </div>
   );
 };

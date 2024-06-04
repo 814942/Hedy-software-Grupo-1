@@ -15,12 +15,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 p-4 flex justify-between items-center">
+    <nav className="p-4 flex justify-between items-center">
       <div className="text-white text-lg">Trello</div>
       <div className="relative">
-      <Link href="boards" className="px-4">
-            Boards
-        </Link>
         <div className="cursor-pointer" onClick={handleUserDropdownToggle}>
           <img src="/user-icon.png" alt="User Icon" className="w-8 h-8 rounded-full" />
         </div>

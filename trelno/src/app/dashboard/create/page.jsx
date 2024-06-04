@@ -1,5 +1,7 @@
-"use client";
+"use client"
+import { useState } from "react";
 import { createBoard } from "@/app/dashboard/actions";
+
 
 const AddBoardModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,6 +9,7 @@ const AddBoardModal = () => {
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
+  
 
   const formRef = useRef < HTMLFormElement > null;
 

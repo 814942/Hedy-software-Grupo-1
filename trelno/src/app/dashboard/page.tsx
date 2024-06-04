@@ -1,21 +1,40 @@
-import AddBoardModal from "@/components/dashboard/AddBoardForm";
-import Boards from "@/components/dashboard/Boards";
-import { deleteBoard, getBoards } from "./actions";
+'use server'
+import React, { FC } from 'react';
+import BoardCard from '@/components/BoardCar';
+import { getBoards } from './actions';
+import Link from 'next/link';
 
-const Page = async () => {
-  const userId = 1;
+
+const BoardsPage: FC = async () => {
 
   const boards = await getBoards();
 
-  console.log("Los boards son: ", boards);
+  console.log(getBoards)
 
-  // deleteBoard(4);
 
   return (
     <div>
-      <h1>Dashboard - List Boards</h1>
+      <div className="container mx-auto p-4 text-white">
+        <h1 className="text-3xl font-bold mb-4">Boards</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Link href='/dashboard/create'>
+          <BoardCard 
+            key={boards[0].id} 
+            id={boards[0].id} 
+            name='Create New'
+          />
+          </Link>
+          {boards.map((board:any) => (
+            <BoardCard 
+              key={board.id} 
+              id={board.id} 
+              name={board.name}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Page;
+export default BoardsPage;

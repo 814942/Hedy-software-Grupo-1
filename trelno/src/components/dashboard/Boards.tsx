@@ -1,4 +1,4 @@
-import { getBoards } from "@/app/dashboard/actions";
+import { getBoards } from "@/app/pages/dashboard/actions";
 
 const Boards = async () => {
   const boards = await getBoards();
