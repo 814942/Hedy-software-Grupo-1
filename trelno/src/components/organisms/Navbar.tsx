@@ -15,17 +15,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-4 flex justify-between items-center">
-      <div className="text-white text-lg">Trello</div>
+    <nav className="bg-gray-700 p-4 flex justify-between items-center">
+      <div className="bg-gray-700 text-white text-lg">Trello</div>
       <div className="relative">
-        <div className="cursor-pointer" onClick={handleUserDropdownToggle}>
-          <img src="/user-icon.png" alt="User Icon" className="w-8 h-8 rounded-full" />
+        <div className="bg-gray-700 cursor-pointer" onClick={handleUserDropdownToggle}>
+          <img src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="User Icon" className="w-8 h-8 rounded-full" />
         </div>
 
         {showUserDropdown && (
-          <div className="absolute top-10 right-0 bg-white shadow-md rounded-md mt-2">
-            <span className="block px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={handleLogout}>
-              Cerrar sesión (Nombre de usuario)
+          <div className="bg-gray-700 absolute top-10 right-0 bg-white shadow-md rounded-md">
+            <span className="bg-gray-700 block px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={handleLogout}>
+              Cerrar sesión
             </span>
           </div>
         )}
