@@ -7,13 +7,9 @@ const Page = async () => {
 
   const boards = await getBoards();
 
-  console.log("Los boards son: ", boards);
-
-  // deleteBoard(4);
-
   return (
     <div>
-      <h1>Dashboard - List Boards</h1>
+      <h1>Dashboard - Board List</h1>
     </div>
   );
 };
