@@ -1,3 +1,4 @@
+
 import { getContainers, getTickets } from "./actions";
 
 const BoardPage = async ({ params }) => {
@@ -13,3 +14,4 @@ const BoardPage = async ({ params }) => {
 };
 
 export default BoardPage;
+

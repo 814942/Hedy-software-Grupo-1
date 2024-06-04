@@ -1,17 +1,19 @@
-import AddBoardModal from "@/components/dashboard/AddBoardForm";
-import Boards from "@/components/dashboard/Boards";
-import { deleteBoard, getBoards } from "./actions";
 
-const Page = async () => {
-  const userId = 1;
+import { FC } from 'react';
+import BoardCard from '@/components/BoardCar';
+import { getBoards } from './actions';
+import ClientBoardsPage from './ClientBoardPage';
+import Navbar from '@/components/organisms/Navbar';
 
+const BoardsPage: FC = async () => {
   const boards = await getBoards();
 
   return (
-    <div>
-      <h1>Dashboard - Board List</h1>
-    </div>
+    <>
+      <Navbar />
+      <ClientBoardsPage boards={boards} />
+    </>
   );
 };
 
-export default Page;
+export default BoardsPage;
