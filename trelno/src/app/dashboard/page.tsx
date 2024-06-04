@@ -1,9 +1,17 @@
-import React, { FC } from 'react';
+import AddBoardModal from "@/components/dashboard/AddBoardForm";
+import Boards from "@/components/dashboard/Boards";
+import { deleteBoard, getBoards } from "./actions";
 
-export const Dashboard: FC = () => {
+const Page = async () => {
+  const userId = 1;
+
+  const boards = await getBoards();
+
   return (
     <div>
-      {/* Dashboard content */}
+      <h1>Dashboard - Board List</h1>
     </div>
   );
 };
+
+export default Page;

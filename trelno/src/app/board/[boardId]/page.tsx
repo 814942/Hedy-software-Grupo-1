@@ -11,6 +11,9 @@ import Modal from '@/components/molecules/Modal';
 import { selectBoard } from '@/utils/supabase/actions/select-board';
 
 const Board: FC = () => {
+    // const boardId = params.boardId;
+    // const containers = await getContainers(boardId);
+    // const tickets = await getTickets(1);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
     const [ticketToEdit, setTicketToEdit] = useState<ITicket | null>(null)
 
