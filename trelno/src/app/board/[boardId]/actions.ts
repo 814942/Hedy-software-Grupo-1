@@ -1,6 +1,9 @@
+"use server"
+
+import { IBoardData } from "@/interfaces/board.interface";
 import { createClient } from "@/utils/supabase/server";
 
-export async function getContainers(id: number) {
+export async function getContainers(id: number): Promise<IBoardData[] | []> {
   const supabase = createClient();
 
   console.log("el id que llega al getContainer: ", id);
@@ -8,9 +11,9 @@ export async function getContainers(id: number) {
   try {
     const { data: containers } = await supabase
       .from("container")
-      .select("*")
+      .select("*, tickets(*)")
       .eq("boardid", id);
-    return containers;
+    return containers!;
   } catch (error) {
     console.error(error);
     return [];
@@ -21,7 +24,7 @@ export async function addContainer(newContainer: any) {
   const supabase = createClient();
   const data = {
     name: newContainer.name,
-    boardid: newContainer.board_id,
+    boardid: newContainer.boardid,
   };
 
   const { error } = await supabase.from("container").insert([data]);
@@ -81,10 +84,12 @@ export async function getTickets(containerId: number) {
 }
 
 export async function addTicket(newTicket: any) {
+  console.log(newTicket)
   const supabase = createClient();
   const data = {
     name: newTicket.name,
-    containerid: newTicket.container_id,
+    description: newTicket.description,
+    containerid: newTicket.containerid,
   };
 
   const { error } = await supabase.from("tickets").insert([data]);
@@ -98,6 +103,7 @@ export async function addTicket(newTicket: any) {
 }
 
 export async function updateTicket(ticketId: number, data: any) {
+  console.log(data)
   const supabase = createClient();
   const { error } = await supabase
     .from("tickets")

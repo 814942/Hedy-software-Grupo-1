@@ -15,12 +15,12 @@ const config: Config = {
           border: "rgb(93 39 49)",
           focus: "rgb(131 58 71)"
         },
-        blue: "rgb(26 29 33)"
+        blue: "rgb(26 29 33)",
+        white: "rgb(248 248 248)",
+        black: "rgb(26 29 33)",
+        gray: "rgb(34 37 41)",
+        orange: "rgb(124 53 37)"
       },
-      white: "rgb(248 248 248)",
-      black: "rgb(26 29 33)",
-      gray: "rgb(34 37 41)",
-      orange: "rgb(124 53 37)"
     },
   },
   plugins: [],
