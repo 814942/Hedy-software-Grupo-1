@@ -30,7 +30,7 @@ export function OAuthButtons() {
         >
           {provider.icon}
           <span className="ml-2 bg-transparent">
-            Login with {provider.displayName}
+            Continue with {provider.displayName}
           </span>
         </button>
       ))}

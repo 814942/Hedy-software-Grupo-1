@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import Image from "next/image";
 
 const Avatar = ({ user, signOut }) => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -14,9 +16,23 @@ const Avatar = ({ user, signOut }) => {
       await signOut();
       console.log("Cerrar sesión");
     } catch (error) {
-      console.error("Error al cerrar sesión", error);
+      redirect("/error");
     }
   };
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowUserDropdown(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="relative rounded-full">
@@ -32,9 +48,12 @@ const Avatar = ({ user, signOut }) => {
               className="w-auto rounded-full"
             />
             {showUserDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 transition-transform transform origin-top-right scale-95">
+              <div
+                className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 transition-transform transform origin-top-right scale-95"
+                ref={dropdownRef}
+              >
                 <div className="px-4 py-2 text-gray-800 border-b border-gray-200">
-                  <div className="font-bold" action={signOut}>
+                  <div className="font-bold" onClick={signOut}>
                     <Link
                       className="w-full px-4 py-2 text-left text-gray-800 hover:bg-gray-100"
                       href="/login"
@@ -50,7 +69,11 @@ const Avatar = ({ user, signOut }) => {
         ) : (
           <div className="rounded-full">
             <img
-              src={user.user_metadata?.avatar_url}
+              src={
+                user.user_metadata?.avatar_url
+                  ? user.user_metadata.avatar_url
+                  : "https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+              }
               alt="avatar"
               className="w-auto rounded-full"
             />

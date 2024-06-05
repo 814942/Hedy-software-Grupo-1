@@ -14,7 +14,7 @@ export default async function LoginPage() {
     return redirect("/dashboard");
   }
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
+    <div className="flex justify-center items-center min-h-screen bg-black">
       <form className="w-full max-w-sm bg-gray-900 p-8 rounded-lg shadow-lg">
         <div className="mb-4 bg-transparent">
           <label
