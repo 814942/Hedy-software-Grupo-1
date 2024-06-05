@@ -3,11 +3,16 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/dist/server/api-utils";
 
-export async function getBoards() {
+export async function getBoards(userId: string) {
   try {
-    const res = await fetch("http://localhost:3000/api/dashboard");
-    const data = await res.json();
-    return data.boards;
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("board")
+      .select("*")
+      .eq("userid", userId);
+
+    if (error) throw error;
+    return data;
   } catch (error) {
     console.error(error);
     return [];
@@ -29,6 +34,7 @@ export async function addBoard(newBoard: any) {
     return false;
   } else {
     revalidatePath("/dashboard");
+    return true;
   }
 }
 
@@ -42,6 +48,7 @@ export async function updateBoard(boardId: number, data: any) {
   } else {
     console.log("Board updated");
     revalidatePath("/dashboard");
+    return true;
   }
 }
 
@@ -55,5 +62,6 @@ export async function deleteBoard(boardId: number) {
   } else {
     console.log("Board deleted");
     revalidatePath("/dashboard");
+    return true;
   }
 }
