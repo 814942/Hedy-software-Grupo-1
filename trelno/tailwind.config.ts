@@ -18,7 +18,7 @@ const config: Config = {
         blue: "rgb(26 29 33)",
         white: "rgb(248 248 248)",
         black: "rgb(26 29 33)",
-        gray: "rgb(34 37 41)",
+        grey: "rgb(34 37 41)",
         orange: "rgb(124 53 37)"
       },
     },

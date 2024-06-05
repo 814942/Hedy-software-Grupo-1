@@ -52,7 +52,7 @@ export const Container = ({ id, name, children, addNewTicket, deleteContainer }:
       {children}
       {
         isNewTicket && (
-          <div className="bg-gray p-4 m-4 rounded-xl mb-4">
+          <div className="bg-grey p-4 m-4 rounded-xl mb-4">
             <input
               className="bg-gray"
               type="text"

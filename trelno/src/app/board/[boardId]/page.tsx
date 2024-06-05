@@ -110,7 +110,7 @@ const Board = ({ params }: IBoardProps) => {
                     : <p>Loading...</p>
                 }
                 <div
-                className="bg-gray p-4 h-fit w-[400px] text-center cursor-pointer rounded-xl mb-4 hover:bg-black"
+                className="bg-grey p-4 h-fit w-[400px] text-center cursor-pointer rounded-xl mb-4 hover:bg-black"
                 
                 >
                 <div onClick={() => setIsNewContainer(!isNewContainer)}>
@@ -118,15 +118,15 @@ const Board = ({ params }: IBoardProps) => {
                 </div>
                 {
                     isNewContainer &&
-                    <div className="bg-gray p-4 m-4 rounded-xl mb-4">
-                    <input
-                      className="bg-gray"
-                      type="text"
-                      placeholder="Introduce un titulo para esta tarjeta"
-                      value={newContainers}
-                      onChange={(e) => handleNewInputContainer(e.target.value)}
-                      onKeyDown={handleNewContainer}
-                    />
+                    <div className="bg-grey p-4 m-4 rounded-xl mb-4">
+                        <input
+                        className="bg-gray"
+                        type="text"
+                        placeholder="Introduce un titulo para esta tarjeta"
+                        value={newContainers}
+                        onChange={(e) => handleNewInputContainer(e.target.value)}
+                        onKeyDown={handleNewContainer}
+                        />
                   </div>
                 }
                 </div>

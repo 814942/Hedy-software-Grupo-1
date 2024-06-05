@@ -9,7 +9,7 @@ const Ticket = ({ id, containerId, title, editTicket }: ITicket) => {
   return (
     <div className='h-max px-4 text-white'>
       <div 
-          className="bg-gray p-4 rounded-xl mb-4 hover:cursor-pointer"
+          className="bg-grey p-4 rounded-xl mb-4 hover:cursor-pointer"
           onClick={() => editTicket(id, containerId)}
       >
           <p>{title}</p>
