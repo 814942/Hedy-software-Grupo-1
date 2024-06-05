@@ -10,7 +10,6 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = async ({
   const [boards, setBoards] = useState(initialBoards);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [newBoardName, setNewBoardName] = useState("");
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   useEffect(() => {
     const fetchBoards = async () => {
       const updatedBoards = await fetch("/api/dashboard")
