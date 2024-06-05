@@ -1,25 +1,25 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import BoardCard from "@/components/BoardCar";
-import { addBoard, deleteBoard } from "./actions";
+import { addBoard, deleteBoard, getBoards } from "./actions";
 import Link from "next/link";
 
-const ClientBoardsPage: React.FC<{ boards: any[] }> = async ({
+const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
   boards: initialBoards,
+  userId
 }) => {
   const [boards, setBoards] = useState(initialBoards);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [newBoardName, setNewBoardName] = useState("");
+
   useEffect(() => {
     const fetchBoards = async () => {
-      const updatedBoards = await fetch("/api/dashboard")
-        .then((res) => res.json())
-        .then((data) => data.boards);
+      const updatedBoards = await getBoards(userId)
       setBoards(updatedBoards);
     };
 
     fetchBoards();
-  }, []);
+  }, [userId]);
 
   const handleCreateClick = () => {
     setIsInputVisible(true);
@@ -31,9 +31,9 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = async ({
 
   const handleInputSubmit = async () => {
     if (newBoardName.trim() !== "") {
-      const newBoard = { name: newBoardName, user_id: 1 }; // Reemplaza esto con el ID de usuario real
+      const newBoard = { name: newBoardName, user_id: userId };
       await addBoard(newBoard);
-      const updatedBoards = await fetch("/api/dashboard")
+      const updatedBoards = await fetch(`/api/dashboard?userid=${userId}`)
         .then((res) => res.json())
         .then((data) => data.boards);
       setBoards(updatedBoards);
