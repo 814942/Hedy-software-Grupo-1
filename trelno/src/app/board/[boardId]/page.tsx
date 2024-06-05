@@ -8,94 +8,18 @@ import { Container } from '@/components/organisms/Containers';
 
 import { IBoardData, ITicket } from '@/interfaces/board.interface';
 import Modal from '@/components/molecules/Modal';
-import { selectBoard } from '@/utils/supabase/actions/select-board';
-import { addContainer, addTicket, deleteContainer, deleteTicket, getContainers, updateContainer, updateTicket } from './actions';
+import { addContainer, addTicket, deleteContainer, deleteTicket, getContainers, updateTicket } from './actions';
 
 interface IBoardProps {
     params: { boardId: string };
 }
 
 const Board = ({ params }: IBoardProps) => {
-    // const boardId = params.boardId;
-    // const containers = await getContainers(boardId);
-    // const tickets = await getTickets(1);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
     const [ticketToEdit, setTicketToEdit] = useState<ITicket | null>(null)
     const [isNewContainer, setIsNewContainer] = useState<boolean>(false)
     const [newContainers, setNewContainers] = useState<string>('')
     const [data, setData] = useState<IBoardData[]>([])
-
-    // const data: IBoardData[] = [
-    //     {
-    //         id: 1,
-    //         name: "TODO",
-    //         tickets: [
-    //              {
-    //                 id: 1,
-    //                 title: "Ticket 1",
-    //                 description: "Ticket 1 description"
-    //             },
-    //             {
-    //                 id: 2,
-    //                 title: "Ticket 2",
-    //                 description: "Ticket 2 description"
-    //             },
-    //             {
-    //                 id: 3,
-    //                 title: "Ticket 3",
-    //                 description: "Ticket 3 description"
-    //             },
-    //             {
-    //                 id: 4,
-    //                 title: "Ticket 4",
-    //                 description: "Ticket 4 description"
-    //             },
-    //             {
-    //                 id: 5,
-    //                 title: "Ticket 5",
-    //                 description: "Ticket 5 description"
-    //             },
-    //             {
-    //                 id: 6,
-    //                 title: "Ticket 6",
-    //                 description: "Ticket 6 description"
-    //             },
-    //             {
-    //                 id: 7,
-    //                 title: "Ticket 7",
-    //                 description: "Ticket 8 description"
-    //             },
-    //         ]
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Done",
-    //         tickets: [
-    //              {
-    //                 id: 1,
-    //                 title: "Ticket 1",
-    //                 description: "Ticket 1 description"
-    //             },
-    //             {
-    //                 id: 2,
-    //                 title: "Ticket 2",
-    //                 description: "Ticket 1 description"
-    //             },
-    //             {
-    //                 id: 3,
-    //                 title: "Ticket 3",
-    //                 description: "Ticket 1 description"
-    //             }
-    //         ]
-    //     },
-        
-    // ]
-    /**
-     * El board renderiza una lista de Containers
-     * Cada Container renderiza una lista de tickets
-     * Containers data debe ser un array de obj containers con id, name y un array de tickets.
-     * containers = [ {id: 1: name: TODO, tickets: [ {id: 1, title: "Ticket 1", description: "Ticket 1 description"}]} ]
-     */
 
     const handleNewTicket = async (name: string, containerid: number, description: string='') => {
         await addTicket({
