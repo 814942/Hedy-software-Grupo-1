@@ -5,7 +5,6 @@ import { useState } from "react";
 const NewTicket = () => {
   const [newTicket, setNewTicket] = useState<string>("")
   const handleNewTicket = (value: string) => {
-    console.log(value)
     setNewTicket(value)
   }
   

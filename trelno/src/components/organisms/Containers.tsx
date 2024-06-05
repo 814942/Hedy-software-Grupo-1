@@ -3,6 +3,7 @@
 import { ReactElement, ReactPortal, useState } from "react";
 import CreationTicket from "../molecules/CreationTicket";
 import NewTicket from "../molecules/NewTicket";
+import { X } from "lucide-react";
 
 type ReactText = string | number;
 type ReactChild = ReactElement | ReactText;
@@ -16,9 +17,11 @@ type IContainerProps = {
   name: string
   children: ReactNode
   addNewTicket: (title: string, id: number) => void
+  deleteContainer: (id: number) => void
+
 }
 
-export const Container = ({ id, name, children, addNewTicket }: IContainerProps) => {
+export const Container = ({ id, name, children, addNewTicket, deleteContainer }: IContainerProps) => {
   const [isNewTicket, setIsNewTicket] = useState<boolean>(false)
   const [newTicket, setNewTicket] = useState<string>("")
 
@@ -28,15 +31,24 @@ export const Container = ({ id, name, children, addNewTicket }: IContainerProps)
 
   const handleAddNewTicket = (e: any) => {
     if (e.key === "Enter") {
-      console.log(id)
       addNewTicket(newTicket, id)
       setIsNewTicket(false)
     }
   }
 
+  const handleDeleteContainer = () => {
+    deleteContainer(id)
+  }
+
   return (
     <div className="rounded-xl bg-black w-[400px] mb-8 overflow-y-scroll">
-      <h2 className="p-4 ml-4 font-semibold">{name}</h2>
+      <div className="flex items-center justify-between p-4">
+        <h2 className="ml-4 font-semibold">{name}</h2>
+        <X 
+          className="cursor-pointer"
+          onClick={handleDeleteContainer}
+        />
+      </div>
       {children}
       {
         isNewTicket && (

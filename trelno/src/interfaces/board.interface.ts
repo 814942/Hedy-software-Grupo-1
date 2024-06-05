@@ -5,7 +5,8 @@ export interface IBoardData {
 }
 
 export interface ITicket {
-    id: number
-    title: string
+    containerid?: number
+    id?: number
+    name: string
     description: string
 }
