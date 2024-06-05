@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import BoardCard from '@/components/BoardCar';
 import { addBoard, deleteBoard } from './actions';
 import Link from 'next/link';
@@ -8,6 +8,15 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
   const [boards, setBoards] = useState(initialBoards);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [newBoardName, setNewBoardName] = useState("");
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      const updatedBoards = await fetch('/api/dashboard').then(res => res.json()).then(data => data.boards);
+      setBoards(updatedBoards);
+    };
+
+    fetchBoards();
+  }, []);
 
   const handleCreateClick = () => {
     setIsInputVisible(true);
@@ -19,7 +28,7 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
 
   const handleInputSubmit = async () => {
     if (newBoardName.trim() !== "") {
-      const newBoard = { name: newBoardName, user_id: 1};  // Reemplaza esto con el ID de usuario real
+      const newBoard = { name: newBoardName, user_id: 1 }; // Reemplaza esto con el ID de usuario real
       await addBoard(newBoard);
       const updatedBoards = await fetch('/api/dashboard').then(res => res.json()).then(data => data.boards);
       setBoards(updatedBoards);
@@ -33,10 +42,9 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
     setNewBoardName("");
   };
 
-  const handleDeleteBoard = async (id: any) => {
+  const handleDeleteBoard = async (id: number) => {
     await deleteBoard(id);
-    const updatedBoards = await fetch('/api/dashboard').then(res => res.json()).then(data => data.boards);
-    setBoards(updatedBoards);
+    setBoards(prevBoards => prevBoards.filter(board => board.id !== id));
   };
 
   return (
@@ -79,8 +87,12 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
             )}
           </div>
           {boards.map((board: any) => (
-            <Link href={`/board/${board.id}`} key={board.id} >
-            <BoardCard key={board.id} id={board.id} name={board.name} onDelete={() => handleDeleteBoard(board.id)} />
+            <Link href={`/board/${board.id}`} key={board.id} className="relative">
+              <BoardCard
+                id={board.id}
+                name={board.name}
+                onDelete={() => handleDeleteBoard(board.id)}
+              />
             </Link>
           ))}
         </div>
