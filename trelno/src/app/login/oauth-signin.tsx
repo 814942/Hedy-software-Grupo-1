@@ -19,17 +19,19 @@ export function OAuthButtons() {
   ];
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4 pt-10 bg-transparent">
       {oAuthProviders.map((provider) => (
         <button
           key={provider.name}
-          className="flex w-[100%] items-center justify-center h-12 px-4 text-white bg-gray-800 rounded-md"
+          className="flex w-[100%] items-center justify-center h-12 px-4 text-white bg-gray-800 rounded-md hover:bg-red-secondary"
           onClick={async () => {
             await oAuthSignIn(provider.name);
           }}
         >
           {provider.icon}
-          <span className="ml-2">Login with {provider.displayName}</span>
+          <span className="ml-2 bg-transparent">
+            Login with {provider.displayName}
+          </span>
         </button>
       ))}
     </div>

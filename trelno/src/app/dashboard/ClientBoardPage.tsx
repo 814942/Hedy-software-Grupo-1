@@ -1,17 +1,20 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import BoardCard from '@/components/BoardCar';
-import { addBoard, deleteBoard } from './actions';
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import BoardCard from "@/components/BoardCar";
+import { addBoard, deleteBoard } from "./actions";
+import Link from "next/link";
 
-const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }) => {
+const ClientBoardsPage: React.FC<{ boards: any[] }> = async ({
+  boards: initialBoards,
+}) => {
   const [boards, setBoards] = useState(initialBoards);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [newBoardName, setNewBoardName] = useState("");
-
   useEffect(() => {
     const fetchBoards = async () => {
-      const updatedBoards = await fetch('/api/dashboard').then(res => res.json()).then(data => data.boards);
+      const updatedBoards = await fetch("/api/dashboard")
+        .then((res) => res.json())
+        .then((data) => data.boards);
       setBoards(updatedBoards);
     };
 
@@ -30,7 +33,9 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
     if (newBoardName.trim() !== "") {
       const newBoard = { name: newBoardName, user_id: 1 }; // Reemplaza esto con el ID de usuario real
       await addBoard(newBoard);
-      const updatedBoards = await fetch('/api/dashboard').then(res => res.json()).then(data => data.boards);
+      const updatedBoards = await fetch("/api/dashboard")
+        .then((res) => res.json())
+        .then((data) => data.boards);
       setBoards(updatedBoards);
       setNewBoardName("");
       setIsInputVisible(false);
@@ -44,7 +49,7 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
 
   const handleDeleteBoard = async (id: number) => {
     await deleteBoard(id);
-    setBoards(prevBoards => prevBoards.filter(board => board.id !== id));
+    setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id));
   };
 
   return (
@@ -82,12 +87,18 @@ const ClientBoardsPage: React.FC<{ boards: any[] }> = ({ boards: initialBoards }
                 onClick={handleCreateClick}
                 className="w-full h-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg p-4 transition duration-300"
               >
-                <span className="bg-gray-700 text-lg font-bold">Create New</span>
+                <span className="bg-gray-700 text-lg font-bold">
+                  Create New
+                </span>
               </button>
             )}
           </div>
           {boards.map((board: any) => (
-            <Link href={`/board/${board.id}`} key={board.id} className="relative">
+            <Link
+              href={`/board/${board.id}`}
+              key={board.id}
+              className="relative"
+            >
               <BoardCard
                 id={board.id}
                 name={board.name}

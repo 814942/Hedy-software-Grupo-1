@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Navbar from "@/components/organisms/Navbar";
 
-export default function Home() {
+export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
     <main className="text-white bg-black h-screen">
       {/* <Navbar /> */}
