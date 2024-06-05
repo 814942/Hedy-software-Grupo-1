@@ -2,8 +2,8 @@ import { FC } from "react";
 import BoardCard from "@/components/BoardCar";
 import { getBoards } from "./actions";
 import ClientBoardsPage from "./ClientBoardPage";
-import Navbar from "@/components/organisms/Navbar";
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 const BoardsPage: FC = async () => {
   const boards = await getBoards();
@@ -13,11 +13,11 @@ const BoardsPage: FC = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user);
-
+  if (!user) {
+    redirect("/login");
+  }
   return (
     <>
-      <Navbar />
       <ClientBoardsPage boards={boards} />
     </>
   );

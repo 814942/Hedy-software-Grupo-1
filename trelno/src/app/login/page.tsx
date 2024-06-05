@@ -10,7 +10,7 @@ export default async function LoginPage() {
   } = await supabase.auth.getUser();
 
   if (user) {
-    return redirect("/todos");
+    return redirect("/dashboard");
   }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
