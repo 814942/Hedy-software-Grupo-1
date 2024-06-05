@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-700 p-4 flex justify-between items-center">
-      <div className="bg-gray-700 text-white text-lg">Trello</div>
+      <div className="bg-gray-700 text-white text-lg">Trellno</div>
       <div className="relative">
         <div className="bg-gray-700 cursor-pointer" onClick={handleUserDropdownToggle}>
           <img src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="User Icon" className="w-8 h-8 rounded-full" />
