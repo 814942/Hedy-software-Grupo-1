@@ -15,13 +15,15 @@ export default function Loading() {
 
   return (
     isLoading && (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-transparent">
+        <h2 className="mb-4 text-4xl font-bold text-white animate-pulse">
+          LOADING
+        </h2>
         <SpinnerCircular
           color="#FFFFFF"
           secondaryColor="#4A5568"
-          size={100}
+          size={60}
           thickness={120}
-          className="animate-pulse"
         />
       </div>
     )

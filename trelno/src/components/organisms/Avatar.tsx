@@ -32,7 +32,7 @@ const Avatar = ({ user, signOut }) => {
               className="w-auto rounded-full"
             />
             {showUserDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-red shadow-lg rounded-md py-2 z-10 transition-transform transform origin-top-right scale-95">
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 transition-transform transform origin-top-right scale-95">
                 <div className="px-4 py-2 text-gray-800 border-b border-gray-200">
                   <div className="font-bold" action={signOut}>
                     <Link
@@ -55,7 +55,7 @@ const Avatar = ({ user, signOut }) => {
               className="w-auto rounded-full"
             />
             {showUserDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-red shadow-lg rounded-md py-2 z-10 transition-transform transform origin-top-right scale-95">
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 transition-transform transform origin-top-right scale-95">
                 <div className="px-4 py-2 text-gray-800 border-b border-gray-200">
                   <div className="font-bold">
                     {user?.user_metadata?.full_name}

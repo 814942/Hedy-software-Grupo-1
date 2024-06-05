@@ -1,32 +1,38 @@
-"use client"
+"use client";
 
-import { updateTicket } from '@/app/board/[boardId]/actions';
-import { ITicket } from '@/interfaces/board.interface';
-import { CircleX } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import { updateTicket } from "@/app/board/[boardId]/actions";
+import { ITicket } from "@/interfaces/board.interface";
+import { CircleX } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 interface IModalProps {
   show: boolean;
   onClose: () => void;
-  ticket: ITicket | null
-  deleteTicket: (id: number) => void
-  updateTicket: (containerid: number, ticket: ITicket) => void
+  ticket: ITicket | null;
+  deleteTicket: (id: number) => void;
+  updateTicket: (containerid: number, ticket: ITicket) => void;
 }
 
-const Modal = ({ show, onClose, ticket, updateTicket, deleteTicket }: IModalProps) => {
-    const [modalTitle, setModalTitle] = useState<string>('');
-    const [modalDescription, setModalDescription] = useState<string>('')
+const Modal = ({
+  show,
+  onClose,
+  ticket,
+  updateTicket,
+  deleteTicket,
+}: IModalProps) => {
+  const [modalTitle, setModalTitle] = useState<string>("");
+  const [modalDescription, setModalDescription] = useState<string>("");
 
   const handleEditTicket = () => {
     updateTicket(ticket?.id!, {
       name: modalTitle,
-      description: modalDescription
-    })
+      description: modalDescription,
+    });
     onClose();
   };
 
   const handleDeleteTicket = () => {
-    deleteTicket(ticket?.id!)
+    deleteTicket(ticket?.id!);
     onClose();
   };
 
@@ -35,7 +41,7 @@ const Modal = ({ show, onClose, ticket, updateTicket, deleteTicket }: IModalProp
       setModalTitle(ticket.name);
       setModalDescription(ticket.description);
     }
-  }, [ticket])
+  }, [ticket]);
 
   if (!show) {
     return null;
@@ -50,34 +56,34 @@ const Modal = ({ show, onClose, ticket, updateTicket, deleteTicket }: IModalProp
         >
           <CircleX />
         </button>
-        <div className='h-1/4 w-full'>
-            <input 
-                className="text-xl font-bold mb-4 bg-grey p-2 border border-blue rounded-lg"
-                value={modalTitle || ''}
-                onChange={(e) => setModalTitle(e.target.value)}
-            />
+        <div className="h-1/4 w-full">
+          <input
+            className="text-xl font-bold mb-4 bg-grey p-2 border border-blue rounded-lg"
+            value={modalTitle || ""}
+            onChange={(e) => setModalTitle(e.target.value)}
+          />
         </div>
-        <div className='h-3/4 w-full'>
-            <textarea 
-                className="text-lg bg-grey h-full w-full border border-blue p-4 rounded-lg resize-none"
-                value={modalDescription || ''}
-                onChange={(e) => setModalDescription(e.target.value)}
-            />
+        <div className="h-3/4 w-full">
+          <textarea
+            className="text-lg bg-grey h-full w-full border border-blue p-4 rounded-lg resize-none"
+            value={modalDescription || ""}
+            onChange={(e) => setModalDescription(e.target.value)}
+          />
         </div>
-      <div className='w-full mt-4 flex gap-4'>
-        <button
+        <div className="w-full mt-4 flex gap-4">
+          <button
             className="bg-orange hover:bg-white hover:text-orange p-2 rounded-lg shadow-lg transition ease-in-out delay-150"
             onClick={handleEditTicket}
-            >
+          >
             Save
-        </button>
-        <button
-            className="bg-white text-gray hover:bg-black hover:text-white p-2 rounded-lg shadow-lg transition ease-in-out delay-150"
+          </button>
+          <button
+            className="bg-white text-grey hover:bg-black hover:text-white p-2 rounded-lg shadow-lg transition ease-in-out delay-150"
             onClick={handleDeleteTicket}
-            >
+          >
             Delete
-        </button>
-      </div>
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -4,9 +4,9 @@ import BoardCard from "@/components/BoardCar";
 import { addBoard, deleteBoard, getBoards } from "./actions";
 import Link from "next/link";
 
-const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
+const ClientBoardsPage: React.FC<{ boards: any[]; userId: string }> = ({
   boards: initialBoards,
-  userId
+  userId,
 }) => {
   const [boards, setBoards] = useState(initialBoards);
   const [isInputVisible, setIsInputVisible] = useState(false);
@@ -14,7 +14,7 @@ const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
 
   useEffect(() => {
     const fetchBoards = async () => {
-      const updatedBoards = await getBoards(userId)
+      const updatedBoards = await getBoards(userId);
       setBoards(updatedBoards);
     };
 
@@ -33,9 +33,10 @@ const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
     if (newBoardName.trim() !== "") {
       const newBoard = { name: newBoardName, user_id: userId };
       await addBoard(newBoard);
-      const updatedBoards = await fetch(`/api/dashboard?userid=${userId}`)
-        .then((res) => res.json())
-        .then((data) => data.boards);
+      // const updatedBoards = await fetch(`/api/dashboard?userid=${userId}`)
+      //   .then((res) => res.json())
+      //   .then((data) => data.boards);
+      const updatedBoards = await getBoards(userId);
       setBoards(updatedBoards);
       setNewBoardName("");
       setIsInputVisible(false);
@@ -53,7 +54,7 @@ const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
   };
 
   return (
-    <div>
+    <div className="bg-black h-screen">
       <div className="container mx-auto p-4 text-white">
         <h1 className="text-3xl font-bold mb-4">Boards</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -67,7 +68,7 @@ const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
                   placeholder="Enter board name"
                   className="w-full p-2 mb-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-900 text-white"
                 />
-                <div className="bg-gray-800 flex justify-between space-x-2">
+                <div className="bg-gray-800 flex justify-between space-x-2 pt-7">
                   <button
                     onClick={handleCancelClick}
                     className="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white font-bold rounded-md transition duration-300"
@@ -87,9 +88,7 @@ const ClientBoardsPage: React.FC<{ boards: any[], userId: string }> = ({
                 onClick={handleCreateClick}
                 className="w-full h-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg p-4 transition duration-300"
               >
-                <span className="bg-gray-700 text-lg font-bold">
-                  Create New
-                </span>
+                <span className="text-lg font-bold">Create New</span>
               </button>
             )}
           </div>
